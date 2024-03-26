@@ -40,5 +40,20 @@ flips([1,2,3,4,5,6,7,8,9]);
 (* Exercise L4.9 *)
 fun lenght(nil) = 0
 | lenght(x::xt) = 1+ lenght(xt); 
+
 fun delete_i_item (nil, i) = nil
-| delete_i_item(x)
+| delete_i_item(x::xt, 1) = xt
+| delete_i_item(x::tx,i) = x :: delete_i_item(tx,i-1);
+delete_i_item([1,2,3,4],1);
+
+(* Exercise L4.10 *)
+fun stange_square(n:int) = (n-1)*(n-1) + 2*n -1;
+stange_square(16);
+
+(* Exercise L4.11 *)
+fun flips_pairs(nil) = nil 
+| flips_pairs(x::lst) =  if #1(x) < #2(x) then flips_pairs(lst) else #2(x),#1(x) @ flips_pairs(lst)
+| flips_pairs(x) =  if #1(x) < #2(x) then x else (#2(x),#1(x))
+
+
+
