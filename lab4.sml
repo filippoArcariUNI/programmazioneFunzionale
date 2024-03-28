@@ -52,8 +52,16 @@ stange_square(16);
 
 (* Exercise L4.11 *)
 fun flips_pairs(nil) = nil 
-| flips_pairs(x::lst) =  if #1(x) < #2(x) then flips_pairs(lst) else #2(x),#1(x) @ flips_pairs(lst)
-| flips_pairs(x) =  if #1(x) < #2(x) then x else (#2(x),#1(x))
+| flips_pairs([(a,b)]) = if a < b then [(a,b)] else [(b,a)]
+| flips_pairs((a,b)::lst) = if a < b then (a,b)::flips_pairs(lst) else (b,a)::flips_pairs(lst);
+flips_pairs([(2,1),(4,3)]);
 
-
+(* Exercise L4.12 *)
+fun first_vowel(nil)=false
+| first_vowel(x::lst)= if x= #"a" orelse x= #"e" orelse x= #"i" orelse x= #"o" orelse x= #"u" then true else false;
+first_vowel([#"c",#"b"]);
+ 
+(* Exercise L4.13 *)
+fun member(nil,x) = nil
+member([1,2,3,4,5,6,7,8],[1,5]);
 
