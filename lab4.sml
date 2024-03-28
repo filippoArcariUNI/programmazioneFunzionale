@@ -40,5 +40,28 @@ flips([1,2,3,4,5,6,7,8,9]);
 (* Exercise L4.9 *)
 fun lenght(nil) = 0
 | lenght(x::xt) = 1+ lenght(xt); 
+
 fun delete_i_item (nil, i) = nil
-| delete_i_item(x)
+| delete_i_item(x::xt, 1) = xt
+| delete_i_item(x::tx,i) = x :: delete_i_item(tx,i-1);
+delete_i_item([1,2,3,4],1);
+
+(* Exercise L4.10 *)
+fun stange_square(n:int) = (n-1)*(n-1) + 2*n -1;
+stange_square(16);
+
+(* Exercise L4.11 *)
+fun flips_pairs(nil) = nil 
+| flips_pairs([(a,b)]) = if a < b then [(a,b)] else [(b,a)]
+| flips_pairs((a,b)::lst) = if a < b then (a,b)::flips_pairs(lst) else (b,a)::flips_pairs(lst);
+flips_pairs([(2,1),(4,3)]);
+
+(* Exercise L4.12 *)
+fun first_vowel(nil)=false
+| first_vowel(x::lst)= if x= #"a" orelse x= #"e" orelse x= #"i" orelse x= #"o" orelse x= #"u" then true else false;
+first_vowel([#"c",#"b"]);
+ 
+(* Exercise L4.13 *)
+fun member(nil,x) = nil
+member([1,2,3,4,5,6,7,8],[1,5]);
+
