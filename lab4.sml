@@ -62,6 +62,15 @@ fun first_vowel(nil)=false
 first_vowel([#"c",#"b"]);
  
 (* Exercise L4.13 *)
-fun member(nil,x) = nil
-member([1,2,3,4,5,6,7,8],[1,5]);
+(* fun member(nil,x) = nil
+member([1,2,3,4,5,6,7,8],[1,5]); *)
 
+(* Exercise L4.16 *)
+fun insertAll(a,nil) = nil
+| insertAll(a,L::Ls) =
+(a::L)::insertAll(a,Ls);
+
+(* Exercise L4.17 *)
+fun powerSet nil = [nil]
+| powerSet (x::xt) = powerSet(xt) @ insertAll(x,powerSet(xt));
+powerSet([1,2,3])
