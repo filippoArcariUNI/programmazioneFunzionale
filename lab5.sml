@@ -40,13 +40,39 @@ end;
 maxList([12.3,3.14,4.25,45.4,5.6,6.5,8.7]);
 
 (* Exercise L5.7 *)
-fun doubleExp(x:real,i)=
-let
-  fun exp(0,exp)= 1.0
-  | exp(base,exp) =base *exp(exp-1)
-  
+fun doubleExp(x:real,0)= x
+| doubleExp(x:real,i) = let
+ val y= doubleExp(x,i-1)
 in
-  exp(x,exp(2.0,i-1)) * exp(x,exp(2.0,i-1))
+  y*y
 end;
+doubleExp(3.3,3);
 
-(* doubleExp(3); *)
+(* Exercise L5.8 *)
+fun sumPairs(nil) = (0,0) 
+| sumPairs((a,b)::tl) = let
+  val (x,y) = sumPairs(tl)
+in  
+  (x+a,y+b) 
+end;
+sumPairs([(1,2),(2,3),(3,4)]);
+
+(* Exercise L5.9*)
+fun sumList(nil) = (0,0)
+| sumList([dispari]) = (0,dispari)
+| sumList(pari::dispari::tl) = let
+    val (totPari,totDispari)=sumList(tl)
+in
+  (totPari+pari,totDispari+dispari)
+end;
+sumList([1,2,3,5,6,7,5]);
+
+(* TUTORATO *)
+(* Acronimo *)
+fun acronimo(nil) = nil
+| acronimo(x::tl) = let
+  val res = hd(explode(x)) :: acronimo(tl)
+in
+  res 
+end;
+acronimo(["ciao","come","va"]);
