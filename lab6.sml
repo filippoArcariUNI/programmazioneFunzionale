@@ -61,9 +61,19 @@ look();
 fun readFullFile() = TextIO.input(myFile);
 readFullFile();
 (* Exercise L6.6 *)
-val myFile=TextIO.openIn("./test.txt");
-fun getList(filename) = if  TextIO.endOfStream(myFile) then nil else let
-  val w= 
+val fileLst=TextIO.openIn("./test.txt");
+
+fun getList(filename) = if  TextIO.endOfStream(filename) then nil else let
+  fun isDivider (c) = case c of
+    "\n" => true
+  | "\t" => true
+  | " " => true
+  | _ => false;
+
+  fun getWord (fileName) = if isDivider(TextIO.inputN(fileName, 1)) then "" else  getWord(fileName) ^ TextIO.inputN(fileName, 1);
+
+  val w = getWord(filename);
 in
-  body
-end
+  w::getList(filename)
+end;
+getList(fileLst);
