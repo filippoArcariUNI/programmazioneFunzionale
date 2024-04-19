@@ -38,8 +38,15 @@ end;
 
 (* FUNZIONI di ORDINE SUPERIORE *)
 (* funzioni che prendono come parametro altre funzioni *)
-fun pow(n) = n*n;
-fun tabulate(val,incremento,0, fun) = print("\n")
-|   tabulate(val,incremento,iterazioni, fun) = print(Int.toString(val); Int.toString(fun(val))) tabulate(val+incremento,incremento,iterazioni-1,fun);
+fun pow(n) = n * n;
+fun tabulate(n,incremento,0, func) = print("\n")
+ | tabulate(n,incremento,iterazioni, func) = let
+   val newVal = n+incremento
+ in
+    print(" |  " ^ Int.toString(n) ^ " | " ^ Int.toString(func(n))^"   |\n");
+   tabulate(newVal,incremento,iterazioni-1,func)
+ end;                                 
 tabulate(1,1,10,pow);
+
+
 
