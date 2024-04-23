@@ -65,15 +65,20 @@ val fileLst=TextIO.openIn("./test.txt");
 
 fun getList(filename) = if  TextIO.endOfStream(filename) then nil else let
   fun isDivider (c) = case c of
-    "\n" => true
-  | "\t" => true
-  | " " => true
-  | _ => false;
+      #"\n" => true
+    | #"\t" => true
+    | #" " => true
+    | _ => false;
 
-  fun getWord (fileName) = if isDivider(TextIO.inputN(fileName, 1)) then "" else  getWord(fileName) ^ TextIO.inputN(fileName, 1);
+  val c = case TextIO.input1(filename) of
+     None => #"\n" 
+   | SOME c => c;
 
+  fun getWord(fileName) = if isDivider(c) then "" else  getWord(fileName) ^ str(c);
   val w = getWord(filename);
 in
   w::getList(filename)
 end;
 getList(fileLst);
+
+
