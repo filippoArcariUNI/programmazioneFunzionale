@@ -62,7 +62,6 @@ fun readFullFile() = TextIO.input(myFile);
 readFullFile();
 (* Exercise L6.6 *)
 val fileLst=TextIO.openIn("./test.txt");
-
 fun getList(filename) = if  TextIO.endOfStream(filename) then nil else let
   fun isDivider (c) = case c of
       #"\n" => true
@@ -70,11 +69,16 @@ fun getList(filename) = if  TextIO.endOfStream(filename) then nil else let
     | #" " => true
     | _ => false;
 
-  val c = case TextIO.input1(filename) of
-     None => #"\n" 
-   | SOME c => c;
-
-  fun getWord(fileName) = if isDivider(c) then "" else  getWord(fileName) ^ str(c);
+  val c = case TextIO.input1 filename of
+                        SOME c => c
+                      | _ => #"\n" 
+  
+  fun getWord(fileName) = if TextIO.endOfStream fileName then
+                    ""
+                else if isDivider c then
+                    ""
+                else
+                    str c ^ getWord fileName
   val w = getWord(filename);
 in
   w::getList(filename)
