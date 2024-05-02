@@ -69,16 +69,14 @@ fun getList(filename) = if  TextIO.endOfStream(filename) then nil else let
     | #" " => true
     | _ => false;
 
-  val c = case TextIO.input1 filename of
-                        SOME c => c
-                      | _ => #"\n" 
+  val c = valOf(TextIO.input1(filename)) 
   
-  fun getWord(fileName) = if TextIO.endOfStream fileName then
+  fun getWord(filename) = if TextIO.endOfStream filename then
                     ""
-                else if isDivider c then
+                else if isDivider(c) then
                     ""
                 else
-                    str c ^ getWord fileName
+                    str c ^ getWord(filename)
   val w = getWord(filename);
 in
   w::getList(filename)
