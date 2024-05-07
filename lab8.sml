@@ -52,8 +52,17 @@ fun curry f x1 x2 x3 = f(x1,x2,x3);
 val g = curry(fn(x,y,z)=> x*y*z);
 g 1 2 3;
 (* Funzioni Build - in map, foldr, foldr tutte curried *)
-
-(* foldr f c [] -> applica la funzione f alla lista partendo da destra, il valore di c serve per capire che valore deve partire  *)
+(* foldr f c [] -> applica la funzione f alla lista partendo da destra, il valore di c serve per capire che valore deve partire   *)
 (* foldl f c [] -> fa la stessa cosa partendo da sinstra  *)
 fun f(x,y) = x*y;
 foldr f 1 [2,1,4];
+(* Exercise L8.7 *)
+fun toReal nil = nil
+|   toReal (lst) = map (fn (x) => real(x)) lst;
+toReal([1,2,3,4]);
+(* Exercise L8.8 *)
+exception noList of int;
+fun logicalAND (nil) = raise noList(0); 
+|   logicalAND (lst) = foldr(fn (x,tl) => x andalso tl) true lst;    
+logicalAND([true,true,true]);
+(* Exercise L8.8 *)
