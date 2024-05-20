@@ -62,7 +62,11 @@ fun toReal nil = nil
 toReal([1,2,3,4]);
 (* Exercise L8.8 *)
 exception noList of int;
-fun logicalAND (nil) = raise noList(0); 
+fun logicalAND (nil) = raise noList(0)
 |   logicalAND (lst) = foldr(fn (x,tl) => x andalso tl) true lst;    
 logicalAND([true,true,true]);
-(* Exercise L8.8 *)
+(* Exercise L8.9 *)
+fun myImplode(nil) = ""
+|   myImplode(lst:char list ) = foldr (op ^) "" (map (str) lst);
+(* Oppure  *)
+val myImplode2 = (foldr (op ^)"") o (map (str));
