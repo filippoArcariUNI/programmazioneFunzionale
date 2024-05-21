@@ -93,7 +93,7 @@ sig
   val remove: ''a -> ''a set -> ''a set
 end;
 
-structure Set =
+(* structure Set =
 strucvalt
     type 'a set = 'a list
 
@@ -102,4 +102,4 @@ strucvalt
   | member x y::ys = if x=y then true else member(x,ys)
   fun insert (x, lst) = if member x lst then lst else x::lst 
   fun remove (x, lst) = if member x lst then 
-end:> SET;
+end:> SET; *)
