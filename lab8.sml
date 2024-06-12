@@ -61,8 +61,29 @@ fun toReal nil = nil
 |   toReal (lst) = map (fn (x) => real(x)) lst;
 toReal([1,2,3,4]);
 (* Exercise L8.8 *)
-exception noList of int;
-fun logicalAND (nil) = raise noList(0); 
+exception noList;
+fun logicalAND (nil) = raise noList
 |   logicalAND (lst) = foldr(fn (x,tl) => x andalso tl) true lst;    
 logicalAND([true,true,true]);
-(* Exercise L8.8 *)
+(* Exercise L8.9 *)
+fun myImplode nil = raise noList
+|   myImplode (lst) = foldr(fn (x,tl) => x :: tl) [] lst; 
+myImplode([#"a",#"b",#"c"]) ;
+fun lreduce (f, nil) = raise noList 
+  | lreduce (f, lst) = foldr (fn (x, y) => f(x,y)) hd(lst) lst;
+fun function(x,y) = x * y ;
+(* lreduce(function,[1,2,3,4,5,6]); *)
+fun substring (nil, pattern) = false
+|   substring (parent, nil) = true
+|   substring (parent, pattern) = let
+    val lstParent = explode parent;
+    val lstPattern = explode pattern;
+in
+    if hd(lstParent)<= hd(lstPattern) andalso hd(lstParent)>= hd(lstPattern) then false else true
+end;
+substring(["ciao"],["iao"]);
+
+
+
+
+ 
